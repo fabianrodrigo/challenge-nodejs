@@ -12,6 +12,10 @@ const app = express();
 
 app.use(bodyParser.json());
 
+//Define the authorization validation
+const authMiddleware = require('./middlewares/auth');
+app.use(authMiddleware);
+
 app.use('/api/users', usersRouters.default);
 app.use('/api/articles', articlesRouters.default);
 

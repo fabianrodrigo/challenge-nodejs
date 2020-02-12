@@ -18,4 +18,18 @@ Then start the app:
 docker-compose up --build challenge-nodejs
 ```
 
+## Run tests
+
+First start the mongodb server.
+
+```bash
+docker-compose up -d mongo
+```
+
+Then start the app in test app:
+
+```bash
+docker-compose up --build challenge-nodejs-test
+```
+
 Enjoy

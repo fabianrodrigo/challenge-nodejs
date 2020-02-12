@@ -3,8 +3,8 @@ var router = express.Router();
 var errors = require('../errors');
 
 // Endpoint to create a user
-router.post('/', function(req, res) {   
-    res.json(errors.unknown_error);
+router.post('/:id', function(req, res) {   
+    res.status(501).json(errors.unknown_error);
 });
 
 module.exports = router;

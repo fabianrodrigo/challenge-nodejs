@@ -14,5 +14,21 @@ services:
             - "8080:8080"
         environment:
             PORT: 8080
+            AUTHORIZATION: example
+            LOG_LEVEL: verbose
+        links:
+            - mongo
+
+    challenge-nodejs-test:
+        build:
+            context: .
+            dockerfile: ./Dockerfile.test
+        restart: always
+        ports:
+            - "8080:8080"
+        environment:
+            PORT: 8080
+            AUTHORIZATION: example
+            LOG_LEVEL: verbose
         links:
             - mongo

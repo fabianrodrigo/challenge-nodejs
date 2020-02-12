@@ -4,23 +4,23 @@ var errors = require('../errors');
 
 // Endpoint to list the article
 router.get('/', function(req, res) {   
-    res.json(errors.unknown_error);
+    res.status(501).json(errors.unknown_error);
 });
 
 
 // Endpoint to create an article
 router.post('/', function(req, res) {   
-    res.json(errors.unknown_error);
+    res.status(501).json(errors.unknown_error);
 });
 
 // Endpoint to update an article
-router.put('/', function(req, res) {   
-    res.json(errors.unknown_error);
+router.put('/:id', function(req, res) {   
+    res.status(501).json(errors.unknown_error);
 });
 
 // Endpoint to delete an article
-router.delete('/', function(req, res) {   
-    res.json(errors.unknown_error);
+router.delete('/:id', function(req, res) {   
+    res.status(501).json(errors.unknown_error);
 });
 
 module.exports = router;
