@@ -1,0 +1,35 @@
+{
+  "name": "challenge-service",
+  "version": "1.0.0",
+  "description": "Challenge Node.JS Service",
+  "main": "server.js",
+  "scripts": {
+    "test": "node test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fabianrodrigo/challenge-nodejs.git"
+  },
+  "keywords": [
+    "challenge",
+    "service",
+    "nodejs"
+  ],
+  "author": "Fabian Rodrigo Collado",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fabianrodrigo/challenge-nodejs/issues"
+  },
+  "homepage": "https://github.com/fabianrodrigo/challenge-nodejs#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-plugin-mocha": "^6.2.2",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-security": "^1.4.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
+}
