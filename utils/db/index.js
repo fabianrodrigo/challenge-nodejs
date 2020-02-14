@@ -21,6 +21,7 @@ const options = {
     family: 4,                           // Use IPv4
 }
 
+//Connecting to mongo db using a connection pool for high availability
 mongoose.connect(connectionString, options).then(
     () => { 
         logger.info('Connection pool started...');

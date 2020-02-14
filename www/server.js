@@ -3,6 +3,7 @@ const http = require('http');
 const logger = require('winston'); 
 
 class ServerBuilder {
+    //Server builder to inject the dal classes
     static build(userDAL, articleDAL) {
         const app = AppBuilder.build(userDAL, articleDAL);
 

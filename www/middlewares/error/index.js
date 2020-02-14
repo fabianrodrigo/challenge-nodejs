@@ -1,6 +1,7 @@
 const logger = require('winston');
 const errors = require('../../errors.js');
 
+//Error handling middleware to respond to malformed json requests.
 function errorHandler(err, req, res, next) {
     logger.error(`error handler middleware => ${err}`);
     if (err instanceof SyntaxError) {

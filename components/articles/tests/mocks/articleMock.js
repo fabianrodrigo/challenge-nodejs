@@ -1,3 +1,4 @@
+//Mock class for ArticleDAL class
 class ArticleDALMock {
 
     constructor() {

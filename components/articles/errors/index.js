@@ -1,3 +1,4 @@
+//Error list used on this module
 module.exports = {
     not_authorized: {
         errorCode: 1,

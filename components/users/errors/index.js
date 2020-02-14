@@ -1,3 +1,4 @@
+//Error list used in this component
 module.exports = {
     not_authorized: {
         errorCode: 1,

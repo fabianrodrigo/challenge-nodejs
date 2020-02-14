@@ -5,6 +5,7 @@ const userSchema = require('./schemas').user;
 
 class UserRouterBuilder {
 
+    //User Router builder to inject the dal classes
     static build(userDAL) {
         var router = express.Router();
 

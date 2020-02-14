@@ -88,5 +88,13 @@ The server validates the endpoint request body using [Joi](https://github.com/ha
 
 The project uses [Winston](https://www.npmjs.com/package/winston) to handle info and error logging across all nodejs files.
 
+### High concurrency
+
+A [Mongoose](https://www.npmjs.com/package/mongoose) connection pool is used to handle high request concurrency.
+Also all enpoints works with asynchronous await/async architecture.
+
+### Critic issues
+
+The project is listening for unhandled exceptions and rejections to be able in the future to automate a notification delivery way to notify de admin.
 
 Enjoy

@@ -1,5 +1,6 @@
 const Joi = require('@hapi/joi');
 
+//Joi schema to automate the json body article validation for user endpoints
 const articleSchema = Joi.object({
     userId: Joi.number()
         .integer()

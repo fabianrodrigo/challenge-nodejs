@@ -1,3 +1,4 @@
+//Most common general errors.
 module.exports = {
     not_authorized: {
         errorCode: 1,

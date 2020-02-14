@@ -10,6 +10,7 @@ const UserRouterBuilder = require('../components/users/routers').UserRouterBuild
 
 class AppBuilder {
 
+    //App builder to inject the dals classes.
     static build(userDAL, articleDAL) {
         const app = express();
 

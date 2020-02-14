@@ -3,6 +3,7 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const Schema = mongoose.Schema;
 
+//Mongoose schema for article documents in Mongo
 const articleSchema = new Schema({
     _id: { type: Number },
     userId: { type: Number, required: true },

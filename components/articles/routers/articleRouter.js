@@ -7,6 +7,7 @@ const paginationSchema = schemas.pagination;
 
 class ArticleRouterBuilder {
 
+    //Article Router builder to inject the dal classes
     static build(usersDAL, articleDAL) {
         var router = express.Router();
 
