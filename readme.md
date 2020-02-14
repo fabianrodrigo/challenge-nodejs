@@ -42,7 +42,7 @@ docker exec -it challenge-nodejs_mongo_1 mongo mongodb://127.0.0.1:27017/challen
 
 ## Documentation
 
-Click [here](https://raw.githubusercontent.com/fabianrodrigo/challenge-nodejs/master/docs) to read the api documentation generated with [Swagger](https://swagger.io/tools/swagger-ui/).
+Click [here](https://fabianrodrigo.github.io/challenge-nodejs/) to read the api documentation generated with [Swagger](https://swagger.io/tools/swagger-ui/).
 
 Click [here](https://raw.githubusercontent.com/fabianrodrigo/challenge-nodejs/master/doc.openapi3) to read the technical specifications OpenAPI 3.0.0 of the api.
 
