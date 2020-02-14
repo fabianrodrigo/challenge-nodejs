@@ -1,4 +1,4 @@
-const article = require('./article');
+const article = require('./articleModel');
 
 module.exports = {
     article: article

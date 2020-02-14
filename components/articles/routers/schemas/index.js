@@ -1,4 +1,4 @@
-const articleSchema = require('./article');
+const articleSchema = require('./articleSchema');
 const paginationSchema = require('./pagination');
 
 module.exports = {

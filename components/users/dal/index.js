@@ -1,4 +1,4 @@
-const UserDAL = require('./user');
+const UserDAL = require('./userDAL');
 
 module.exports = {
     UserDAL: UserDAL 

@@ -1,4 +1,4 @@
-const ArticleRouterBuilder = require("./article");
+const ArticleRouterBuilder = require("./articleRouter");
 
 module.exports = {
     ArticleRouterBuilder: ArticleRouterBuilder

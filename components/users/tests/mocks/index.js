@@ -1,4 +1,4 @@
-const UserDALMock = require('./user');
+const UserDALMock = require('./userDAL');
 
 module.exports = {
     UserDALMock: UserDALMock

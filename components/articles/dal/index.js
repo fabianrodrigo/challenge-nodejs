@@ -1,4 +1,4 @@
-const ArticleDAL = require('./article');
+const ArticleDAL = require('./articledal');
 
 module.exports = {
     ArticleDAL: ArticleDAL 
