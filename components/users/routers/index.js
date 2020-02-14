@@ -1,5 +1,5 @@
-const articles = require("./articles");
+const UserRouterBuilder = require("./user");
 
 module.exports = {
-    default: articles
+    UserRouterBuilder: UserRouterBuilder
 }

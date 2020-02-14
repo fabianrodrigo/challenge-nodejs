@@ -9,6 +9,8 @@ const articleSchema = new Schema({
     title: { type: String, required: true },
     text: { type: String, required: true },
     tags: { type: [String] },
+}, {
+    versionKey: false
 });
 
 articleSchema.plugin(AutoIncrement, {id: 'article_id_counter'});

@@ -4,19 +4,31 @@ const express = require('express');
 //Call the body parser to add support to json body parsing
 const bodyParser = require('body-parser');
 
-//Call all routers of all components
-const usersRouters = require('../components/articles/routers');
-const articlesRouters = require('../components/users/routers');
+//Call all router builders of all components
+const ArticleRouterBuilder = require('../components/articles/routers').ArticleRouterBuilder;
+const UserRouterBuilder = require('../components/users/routers').UserRouterBuilder;
 
-const app = express();
+class AppBuilder {
 
-app.use(bodyParser.json());
+    static build(userDAL, articleDAL) {
+        const app = express();
 
-//Define the authorization validation
-const authMiddleware = require('./middlewares/auth');
-app.use(authMiddleware);
+        app.set("env", "production"); // This prevent the body parser to throws parsig exceptions
+        app.use(bodyParser.json());
+        
+        //Define the authorization validation
+        const authMiddleware = require('./middlewares/auth');
+        app.use(authMiddleware);
 
-app.use('/api/users', usersRouters.default);
-app.use('/api/articles', articlesRouters.default);
+        //Define the error handling
+        const errorMiddleware = require('./middlewares/error');
+        app.use(errorMiddleware);
 
-module.exports = app
+        app.use('/api/users', UserRouterBuilder.build(userDAL));
+        app.use('/api/articles', ArticleRouterBuilder.build(userDAL, articleDAL));
+        
+        return app;
+    }
+}
+
+module.exports = AppBuilder;

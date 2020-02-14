@@ -5,4 +5,4 @@ require('../../../utils/log');
 require('../../../utils/errors');
 
 require('./db');
-//require('./endpoints');
+require('./endpoints');

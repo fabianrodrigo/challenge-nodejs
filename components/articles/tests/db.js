@@ -110,4 +110,22 @@ describe('Article DB operations', () => {
         const docGet = await articleDAL.get(docCreate._id);
         assert.isNull(docGet);
     });
+
+    it('List all articles and check if it throws an exception' , async () => {
+        const pagination = {
+            page: 0,
+            size: 10
+        };
+        const listResult = await articleDAL.getAll(pagination.page * pagination.size, pagination.size).catch((err) => {
+            assert.isUndefined(err);
+        });
+        assert.isArray(listResult);
+    });
+
+    it('Count all articles and check if it throws an exception' , async () => {
+        const count = await articleDAL.count().catch((err) => {
+            assert.isUndefined(err);
+        });
+        assert.isDefined(count);
+    });
 });

@@ -1,4 +1,4 @@
-const server = require('../../../www');
+const ServerBuilder = require('../../../www');
 const errors = require('../errors');
 
 //Define mocha functions
@@ -16,6 +16,13 @@ const request = chai.request;
 
 const auth = process.env.AUTHORIZATION;
 
+//Mock the user dal
+const UserDALMock = require('./mocks').UserDALMock;
+const userDALMock = new UserDALMock();
+
+const builtServer = ServerBuilder.build(userDALMock, null);
+const server = builtServer.server;
+
 describe('Users endpoint positive cases', () => {
     it('Creates new user with authentication using valid name and avatar.', async () => {
         const user = {
@@ -31,6 +38,9 @@ describe('Users endpoint positive cases', () => {
         expect(200).to.be.equal(res.status);
         assert.exists(res.body);
         assert.notExists(res.body.error);
+        assert.exists(res.body._id);
+        assert.exists(res.body.name);
+        assert.exists(res.body.avatar);
     });
 });
 
@@ -40,7 +50,7 @@ describe('User endpoint error tests', () => {
         };
         
         const res = await request(server)
-            .post('/api/user')
+            .post('/api/users')
             .send(user);
 
         expect(403).to.be.equal(res.status);
@@ -68,7 +78,7 @@ describe('User endpoint error tests', () => {
         };
         
         const res = await request(server)
-            .post('/api/user')
+            .post('/api/users')
             .set('Authorization', auth)
             .send(user);
 
@@ -84,43 +94,12 @@ describe('User endpoint error tests', () => {
         };
         
         const res = await request(server)
-            .post('/api/user')
+            .post('/api/users')
             .set('Authorization', auth)
             .send(user);
 
         expect(400).to.be.equal(res.status);
         expect(errors.invalid_avatar.error).to.be.equal(res.body.error);   
         expect(errors.invalid_avatar.errorCode).to.be.equal(res.body.errorCode);
-    });
-
-    it('Creates new user with authentication using no avatar, it should fail.', async () => {
-        const article = {
-            name: 'Peter'
-        };
-        
-        const res = await request(server)
-            .post('/api/user')
-            .set('Authorization', auth)
-            .send(user);
-
-        expect(400).to.be.equal(res.status);
-        expect(errors.invalid_avatar.error).to.be.equal(res.body.error);   
-        expect(errors.invalid_avatar.errorCode).to.be.equal(res.body.errorCode);   
-    });
-
-    it('Creates new user with authentication using broken url avatar, it should fail.', async () => {
-        const user = {
-            name: 'Peter',
-            avatar: 'this is an invalid url'
-        };
-        
-        const res = await request(server)
-            .post('/api/user')
-            .set('Authorization', auth)
-            .send(user);
-
-        expect(400).to.be.equal(res.status);
-        expect(errors.invalid_avatar.error).to.be.equal(res.body.error);   
-        expect(errors.invalid_avatar.errorCode).to.be.equal(res.body.errorCode);   
     });
 });

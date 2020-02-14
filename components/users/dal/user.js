@@ -17,7 +17,6 @@ class UserDAL {
         return await user.save().catch((err) => {
             const newError = new Error(`error creating user with name "${name}" and avatar "${avatar}": ${err}`);
             logger.error(newError);
-            throw newError;
         });
     }
 
@@ -26,7 +25,6 @@ class UserDAL {
         return await User.findOne({_id: id}).catch((err) => {
             const newError = new Error(`error getting article ${id}: ${err}`);
             logger.error(newError);
-            throw newError;
         });
     }
 }
