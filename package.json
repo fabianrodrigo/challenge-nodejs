@@ -4,7 +4,7 @@
   "description": "Challenge Node.JS Service",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha ./components/users/tests/index.js  ./components/articles/tests/index.js",
+    "test": "./node_modules/.bin/mocha ./components/articles/tests/index.js ./components/users/tests/index.js",
     "start": "node server.js"
   },
   "repository": {
@@ -34,6 +34,9 @@
     "body-parser": "^1.19.0",
     "chai-http": "^4.3.0",
     "express": "^4.17.1",
+    "mongoose": "^5.8.12",
+    "mongoose-sequence": "^5.2.2",
+    "q": "^1.5.1",
     "winston": "^3.2.1"
   }
 }

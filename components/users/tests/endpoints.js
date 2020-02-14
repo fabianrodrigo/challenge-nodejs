@@ -16,125 +16,111 @@ const request = chai.request;
 
 const auth = process.env.AUTHORIZATION;
 
-describe('Endpoints positive cases', () => {
-    it('Creates new user with authentication using valid name and avatar.', () => {
+describe('Users endpoint positive cases', () => {
+    it('Creates new user with authentication using valid name and avatar.', async () => {
         const user = {
             name: 'Peter',
             avatar: 'http://www.validurl.com/validpage.html'
         };
         
-        request(server)
+        const res = await request(server)
             .post('/api/users')
             .set('Authorization', auth)
-            .send(user)
-            .end((err, res) => {
-                if (err) return done(err);
-                expect(200).to.be.equal(res.status);
-                assert.exists(res.body);
-                assert.notExists(res.body.error);           
-            });
+            .send(user);
+
+        expect(200).to.be.equal(res.status);
+        assert.exists(res.body);
+        assert.notExists(res.body.error);
     });
 });
 
-describe('Endpoint error tests', () => {
-    it('Creates new user without authetication and it should return unauthorized access', () => {
+describe('User endpoint error tests', () => {
+    it('Creates new user without authetication and it should return unauthorized access', async () => {
         const user = {
         };
         
-        request(server)
+        const res = await request(server)
             .post('/api/user')
-            .send(user)
-            .end((err, res) => {
-                if (err) return done(err);
-                expect(403).to.be.equal(res.status);        
-            });
+            .send(user);
+
+        expect(403).to.be.equal(res.status);
     });
 
-    it('Creates new user with authentication using empty name, it should fail.', () => {
+    it('Creates new user with authentication using empty name, it should fail.', async () => {
         const user = {
             name: '',
             avatar: 'http://www.validurl.com/validpage.html'
         };
         
-        request(server)
+        const res = await request(server)
             .post('/api/users')
             .set('Authorization', auth)
-            .send(user)
-            .end((err, res) => {
-                if (err) return done(err);
-                expect(400).to.be.equal(res.status);
-                expect(errors.invalid_name.error).to.be.equal(res.body.error);   
-                expect(errors.invalid_name.errorCode).to.be.equal(res.body.errorCode);   
-            });
+            .send(user);
+
+        expect(400).to.be.equal(res.status);
+        expect(errors.invalid_name.error).to.be.equal(res.body.error);   
+        expect(errors.invalid_name.errorCode).to.be.equal(res.body.errorCode);   
     });
 
-    it('Creates new user with authentication using no name, it should fail.', () => {
+    it('Creates new user with authentication using no name, it should fail.', async () => {
         const user = {
             avatar: 'http://www.validurl.com/validpage.html'
         };
         
-        request(server)
+        const res = await request(server)
             .post('/api/user')
             .set('Authorization', auth)
-            .send(user)
-            .end((err, res) => {
-                if (err) return done(err);
-                expect(400).to.be.equal(res.status);
-                expect(errors.invalid_name.error).to.be.equal(res.body.error);   
-                expect(errors.invalid_name.errorCode).to.be.equal(res.body.errorCode);   
-            });
+            .send(user);
+
+        expect(400).to.be.equal(res.status);
+        expect(errors.invalid_name.error).to.be.equal(res.body.error);   
+        expect(errors.invalid_name.errorCode).to.be.equal(res.body.errorCode);
     });
 
-    it('Creates new user with authentication using empty avatar, it should fail.', () => {
+    it('Creates new user with authentication using empty avatar, it should fail.', async () => {
         const user = {
             name: 'Peter',
             avatar: ''
         };
         
-        request(server)
+        const res = await request(server)
             .post('/api/user')
             .set('Authorization', auth)
-            .send(user)
-            .end((err, res) => {
-                if (err) return done(err);
-                expect(400).to.be.equal(res.status);
-                expect(errors.invalid_avatar.error).to.be.equal(res.body.error);   
-                expect(errors.invalid_avatar.errorCode).to.be.equal(res.body.errorCode);   
-            });
+            .send(user);
+
+        expect(400).to.be.equal(res.status);
+        expect(errors.invalid_avatar.error).to.be.equal(res.body.error);   
+        expect(errors.invalid_avatar.errorCode).to.be.equal(res.body.errorCode);
     });
 
-    it('Creates new user with authentication using no avatar, it should fail.', () => {
+    it('Creates new user with authentication using no avatar, it should fail.', async () => {
         const article = {
             name: 'Peter'
         };
         
-        request(server)
+        const res = await request(server)
             .post('/api/user')
             .set('Authorization', auth)
-            .send(user)
-            .end((err, res) => {
-                if (err) return done(err);
-                expect(400).to.be.equal(res.status);
-                expect(errors.invalid_avatar.error).to.be.equal(res.body.error);   
-                expect(errors.invalid_avatar.errorCode).to.be.equal(res.body.errorCode);   
-            });
+            .send(user);
+
+        expect(400).to.be.equal(res.status);
+        expect(errors.invalid_avatar.error).to.be.equal(res.body.error);   
+        expect(errors.invalid_avatar.errorCode).to.be.equal(res.body.errorCode);   
     });
 
-    it('Creates new user with authentication using broken url avatar, it should fail.', () => {
+    it('Creates new user with authentication using broken url avatar, it should fail.', async () => {
         const user = {
             name: 'Peter',
             avatar: 'this is an invalid url'
         };
         
-        request(server)
+        const res = await request(server)
             .post('/api/user')
             .set('Authorization', auth)
-            .send(user)
-            .end((err, res) => {
-                if (err) return done(err);
-                expect(400).to.be.equal(res.status);
-                expect(errors.invalid_avatar.error).to.be.equal(res.body.error);   
-                expect(errors.invalid_avatar.errorCode).to.be.equal(res.body.errorCode);   
-            });
+            .send(user);
+
+        expect(400).to.be.equal(res.status);
+        expect(errors.invalid_avatar.error).to.be.equal(res.body.error);   
+        expect(errors.invalid_avatar.errorCode).to.be.equal(res.body.errorCode);   
     });
 });

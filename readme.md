@@ -32,4 +32,12 @@ Then start the app in test app:
 docker-compose up --build challenge-nodejs-test
 ```
 
+## Hints
+
+Connect to database as user.
+
+```bash
+docker exec -it challenge-nodejs_mongo_1 mongo mongodb://127.0.0.1:27017/challenge -u user -p pass
+```
+
 Enjoy

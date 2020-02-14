@@ -1,11 +1,17 @@
 version: '3'
 services:
     mongo:
-        image: mongo
+        image: aashreys/mongo-auth:latest
         restart: always
         environment:
-            MONGO_INITDB_ROOT_USERNAME: root
-            MONGO_INITDB_ROOT_PASSWORD: example
+          - AUTH=yes
+          - MONGODB_ADMIN_USER=root
+          - MONGODB_ADMIN_PASS=mysecret
+          - MONGODB_APPLICATION_DATABASE=challenge
+          - MONGODB_APPLICATION_USER=user
+          - MONGODB_APPLICATION_PASS=pass
+        ports:
+          - "27017:27017"
 
     challenge-nodejs:
         build: .
@@ -16,6 +22,7 @@ services:
             PORT: 8080
             AUTHORIZATION: example
             LOG_LEVEL: verbose
+            CONNECTIONSTRING: mongodb://user:pass@mongo/challenge
         links:
             - mongo
 
@@ -30,5 +37,6 @@ services:
             PORT: 8080
             AUTHORIZATION: example
             LOG_LEVEL: verbose
+            CONNECTIONSTRING: mongodb://user:pass@mongo/challenge
         links:
             - mongo
