@@ -40,4 +40,53 @@ Connect to database as user.
 docker exec -it challenge-nodejs_mongo_1 mongo mongodb://127.0.0.1:27017/challenge -u user -p pass
 ```
 
+## Documentation
+
+Click [here](https://raw.githubusercontent.com/fabianrodrigo/challenge-nodejs/master/docs) to read the api documentation generated with [Swagger](https://swagger.io/tools/swagger-ui/).
+
+Click [here](https://raw.githubusercontent.com/fabianrodrigo/challenge-nodejs/master/doc.openapi3) to read the technical specifications OpenAPI 3.0.0 of the api.
+
+Click [here](https://raw.githubusercontent.com/fabianrodrigo/challenge-nodejs/master/challenge-nodejs.postman_collection.json) to have the [Postman](https://www.postman.com/) configuration file for testing the API.
+
+## Architecture
+
+This is a list of different features:
+
+### Modularity
+
+The project was organized in two components: Orders and Articles. The modularity is important to be able to scale the architecture in the future, for example, splitting each component in different microservices.
+
+### Decoupling
+
+Each reference to o folder is always done to the index js file. The internal structure of the folder is private to the module.
+
+### Dependency injection
+
+The nodejs express server and app are generated using builders with dependency injections, to be able to define that set of dal classes will be used.
+
+This feature allows to build a full coverage set of tests mocking the users and articles dals.
+
+### Unit testing
+
+The using testing was done using [Mocha](https://www.npmjs.com/package/mocha) and [Chai](https://www.npmjs.com/package/chai).
+
+The tests are grouped in endpoint tests and db tests,
+
+The endpoints tests covers the success use cases, and each possible error case, mocking the users and articles DALs.
+
+The db tests covers all mongo db operations.
+
+### Middleware
+
+The token authentication, the error handling and also a future implementation of monitoring could be done using this pattern over the express app.
+
+### API Validation
+
+The server validates the endpoint request body using [Joi](https://github.com/hapijs/joi). Each endpoint is linked to a Joi schema.
+
+### Logging
+
+The project uses [Winston](https://www.npmjs.com/package/winston) to handle info and error logging across all nodejs files.
+
+
 Enjoy

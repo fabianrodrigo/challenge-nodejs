@@ -1,0 +1,340 @@
+openapi: 3.0.0
+info:
+  description: This is a simple API
+  version: 1.0.0
+  title: Challenge NodeJS API
+  # put the contact info for your development or API team
+  contact:
+    email: fabianrodrigo2006@yahoo.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: authors
+  description: Operations available to regular authors
+
+paths:
+  /users:
+    post:
+      summary: Creates a new user.
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: The user data 
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserOutput'
+        400:
+          description: Invalid name
+                       Invalid avatar
+                       Malformed json
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        403:
+          description: Not authorized
+        500:
+          description: Unknown error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /articles:
+    post:
+      summary: Creates a new article.
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: The article data 
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArticleInput'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleOutput'
+        400:
+          description: Invalid title
+                       Invalid text
+                       Malformed json
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        403:
+          description: Not authorized
+        404:
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unknown error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update a article.
+      parameters:
+        - in: path
+          name: article id
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: The article data 
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArticleInput'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleOutput'
+        400:
+          description: Invalid title
+                       Invalid text
+                       Malformed json
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        403:
+          description: Not authorized
+        404:
+          description: User not found / Article not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unknown error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete a article.
+      parameters:
+        - in: path
+          name: article id 
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+      responses:
+        204:
+          description: No content
+        404:
+          description: Article not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unknown error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      summary: List all article paginated
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+          required: false
+        - in: query
+          name: size
+          schema:
+            type: integer
+          required: false
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: Article list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleList'
+        500:
+          description: Unknown error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+      - errorCode
+      - error
+      properties:
+        errorCode:
+          type: string
+        error:
+          type: string
+    UserInput:
+      type: object
+      required:
+      - _id
+      - name
+      - avatar
+      properties:
+        _id:
+          type: string
+          format: int32
+          example: 1
+        name:
+          type: string
+          example: Peter
+          minLength: 1
+          maxLength: 255
+        avatar:
+          type: string
+          example: http://validurl.com/image.gif
+          minLength: 1
+          maxLength: 255
+    UserOutput:
+      type: object
+      required:
+      - name
+      - avatar
+      properties:
+        name:
+          type: string
+          example: Peter
+        avatar:
+          type: string
+          example: http://validurl.com/image.gif
+    ArticleInput:
+      type: object
+      required:
+      - userId
+      - title
+      - text
+      - tags
+      properties:
+        userId:
+          type: string
+          format: int32
+          example: 1
+        title:
+          type: string
+          example: Title example
+          minLength: 1
+          maxLength: 255
+        text:
+          type: string
+          example: Title body
+          minLength: 1
+        tags:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 255
+    ArticleOutput:
+      type: object
+      required:
+      - _id
+      - userId
+      - title
+      - text
+      - tags
+      properties:
+        _id:
+          type: string
+          format: int32
+          example: 1
+        userId:
+          type: string
+          format: int32
+          example: 1
+        title:
+          type: string
+          example: Title example
+          minLength: 1
+          maxLength: 255
+        text:
+          type: string
+          minLength: 1
+          example: Title body
+        tags:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 255
+    ArticleList:
+      type: object
+      required:
+      - results
+      - page
+      - totalPage
+      - size
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArticleOutput'
+        page:
+          type: integer
+          format: int32
+          example: 1  
+        totalPages:
+          type: integer
+          format: int32
+          example: 1  
+        size:
+          type: integer
+          format: int32
+          example: 1  
