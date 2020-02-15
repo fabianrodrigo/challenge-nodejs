@@ -1,6 +1,6 @@
 # Challenge
 
-Challenge is a NodeJS library for developing a web service.
+Challenge is a NodeJS web service developed according to the provided specifications.
 
 ## Usage
 
